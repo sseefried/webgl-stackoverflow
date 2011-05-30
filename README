@@ -1,0 +1,17 @@
+WebGL example
+
+I'm trying to get a simple effect to display using WebGL. Naturally, this means I'm using the fragment shader language defined in the GLSL ES 1.0 specification.
+
+I haven't shown my Javascript code to initialise the canvas, compile and link shaders because, to be honest, I don't fully understand it yet. What I do know is that it sets up a square and uses the fragment and vertex shaders to determine the pixel colors. The following code will just display a white square.
+
+gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+
+However, if I change the alpha component to 1.0 then it will show a black square instead.
+
+gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0); // displays a black square
+
+I'm assuming that the color that is output by the fragment shader must be combined with some previous color. How do I make sure that only the last color (regardless of its alpha value) is what is actually chosen as the color to be displayed?
+
+Or perhaps I've got the order the wrong way around. Perhaps there is a later phase that is combining with the color from the fragment shader to produce the white color. In any case, I know that some kind of blending is going on because when I change the alpha value to 0.5 I get a grey square. I just want to know, where is the white color coming from? And how do I get rid of it?
+
+
