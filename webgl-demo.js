@@ -14,14 +14,17 @@ var perspectiveMatrix;
 //
 function start() {
   canvas = document.getElementById("glcanvas");
+
   initWebGL(canvas);
   if (gl) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    gl.clearDepth(1.0);               
-    gl.enable(gl.DEPTH_TEST);         
-    gl.depthFunc(gl.LEQUAL);          
+    gl.clearDepth(1.0);
+    gl.enable(gl.DEPTH_TEST);
+    gl.depthFunc(gl.LEQUAL);
 
-    gl.disable(gl.BLEND); // even with this disabled I still see a grey square! 
+//    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+//    gl.enable(gl.BLEND);
+//    gl.disable(gl.BLEND);
     initShaders();
     initBuffers();
     setInterval(drawScene, 15);
@@ -33,7 +36,8 @@ function initWebGL() {
   gl = null;
 
   try {
-    gl = canvas.getContext("experimental-webgl");
+      gl = canvas.getContext("experimental-webgl", { alpha: false } );
+
   }
   catch(e) {
   }

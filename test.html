@@ -10,10 +10,74 @@
     <!-- Fragment shader program --> 
  
     <script id="shader-fs" type="x-shader/x-fragment"> 
+#define gl_ModelViewProjectionMatrix ModelViewProjectionMatrix
+#define gl_NormalMatrix NormalMatrix
+
+precision highp float;
+
+uniform mat4 gl_ModelViewProjectionMatrix;
+uniform mat3 gl_NormalMatrix;
+
+#define _uniform time
+#define _attribute uv_a
+#define _varying_F uv_v
+#define _varying_S pos_v
+uniform   float _uniform;
+varying   vec2 _varying_F;
+varying   vec3 _varying_S;
 
 void main () {
-      // produces a grey square
-      gl_FragColor = vec4(0.0, 0.0, 0.0, 0.5);
+    vec2  x25 = vec2(2.0,2.0);
+    vec2  x34 = vec2(0.33333334,0.33333334);
+    float x41 = (1.0 + cos(_uniform)) * 0.5;
+    vec2  x54 = vec2(0.33333334,0.33333334);
+    vec2  x58 = vec2(-0.5,-0.5);
+    vec2  x65 = vec2(0.5,0.5);
+    float x77 = -6.2831855 * (sin(_uniform) * 0.2) * sqrt(dot(_varying_F
+                                                             ,_varying_F));
+    float x75 = cos(x77);
+    float x102 = sin(x77);
+    float x69 = dot(vec2(x75,- x102),_varying_F);
+    float x106 = dot(vec2(x75,x102),_varying_F.yx);
+    vec2  x114 = vec2(1.0,1.0);
+    vec2  x118 = vec2(2.0,2.0);
+    vec2  x127 = vec2(0.33333334,0.33333334);
+    vec2  x134 = vec2(0.33333334,0.33333334);
+    vec2  x138 = vec2(-0.5,-0.5);
+    vec2  x145 = vec2(0.5,0.5);
+    vec2  x149 = vec2(1.0,1.0);
+    vec2  x163 = vec2(4.0,4.0);
+    vec2  x172 = vec2(0.33333334,0.33333334);
+    vec2  x179 = vec2(0.33333334,0.33333334);
+    vec2  x183 = vec2(-0.5,-0.5);
+    vec2  x190 = vec2(0.5,0.5);
+    vec2  x194 = vec2(1.0,1.0);
+    vec2  x198 = vec2(4.0,4.0);
+    vec2  x207 = vec2(0.33333334,0.33333334);
+    vec2  x214 = vec2(0.33333334,0.33333334);
+    vec2  x218 = vec2(-0.5,-0.5);
+    vec2  x225 = vec2(0.5,0.5);
+    vec2  x229 = vec2(1.0,1.0);
+    bool  x10 = dot(x25 * (1.0 / (x34 + vec2(x41,x41) * x54) * (x58 +
+                                                                mod(x65 +
+                                                                    vec2(x69
+                                                                        ,x106)
+                                                                   ,x114)))
+                   ,x118 * (1.0 / (x127 + vec2(x41,x41) * x134) * (x138 +
+                                                                   mod(x145 +
+                                                                       vec2(x69
+                                                                           ,x106)
+                                                                      ,x149)))) <=
+                1.0 && ! (dot(x163 * (1.0 / (x172 + vec2(x41,x41) * x179) *
+                                      (x183 + mod(x190 + vec2(x69,x106),x194)))
+                             ,x198 * (1.0 / (x207 + vec2(x41,x41) * x214) *
+                                      (x218 + mod(x225 + vec2(x69,x106)
+                                                 ,x229)))) <= 1.0);
+    gl_FragColor = vec4(x10 ? 0.0 : 1.0
+                       ,x10 ? 0.0 : 1.0
+                       ,x10 ? 0.0 : 1.0
+                       ,x10 ? 0.0 : 1.0);
+    
 }
    </script> 
     
@@ -36,7 +100,7 @@ void main () {
   </head> 
   
   <body onload="start()"> 
-    <canvas id="glcanvas" width="640" height="480"> 
+    <canvas id="glcanvas" width="640" height="480" style="background: red;"> 
       Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
     </canvas> 
   </body> 
