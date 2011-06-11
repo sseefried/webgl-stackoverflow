@@ -10195,7 +10195,7 @@ function drawScene() {
 
   var timeUniform = gl.getUniformLocation(shaderProgram, "time");
   timeValue += 0.01;
-  gl.uniform1f(timeUniform, time);
+  gl.uniform1f(timeUniform, timeValue);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, uv_a_vertices.length / 2);
 
 }
