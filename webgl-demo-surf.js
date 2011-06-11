@@ -5,7 +5,7 @@ var mvMatrix;
 var shaderProgram;
 var uv_a;
 var perspectiveMatrix;
-var time = 1;
+var timeValue = 1;
 
 //
 // start
@@ -10194,10 +10194,10 @@ function drawScene() {
   gl.uniformMatrix3fv(normalMatrixUniform, false, normalMatrix);
 
   var timeUniform = gl.getUniformLocation(shaderProgram, "time");
-  time+=0.1;
-  gl.uniform1f(timeUniform, false,time);
-
+  timeValue += 0.01;
+  gl.uniform1f(timeUniform, time);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, uv_a_vertices.length / 2);
+
 }
 
 //
